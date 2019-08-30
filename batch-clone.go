@@ -28,6 +28,7 @@ func main() {
 		Name:        "username",
 		Destination: &username,
 	}, &cli.StringFlag{
+		// @todo Add access-token flag as environment variable
 		Name:        "access-token",
 		Destination: &token,
 	})
@@ -69,6 +70,7 @@ func main() {
 		}
 
 		for _, e := range data {
+			// @todo add functionality to actually clone the repositories, instead of only listing them
 			fmt.Println(e.GitURL)
 		}
 
