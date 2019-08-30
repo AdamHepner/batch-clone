@@ -15,7 +15,7 @@ import (
 // RepoEntry is the format used by GH to report all basic information about a repo
 // I only need one position here, so I'm sticking to basics
 type RepoEntry struct {
-	GitURL string `json:"git_url"`
+	GitURL string `json:"ssh_url"`
 }
 
 func main() {
