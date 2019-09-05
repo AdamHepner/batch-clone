@@ -31,6 +31,7 @@ func main() {
 		// @todo Add access-token flag as environment variable
 		Name:        "access-token",
 		Destination: &token,
+		EnvVars:     []string{"GITHUB_TOKEN"},
 	})
 
 	app.Action = func(c *cli.Context) error {
