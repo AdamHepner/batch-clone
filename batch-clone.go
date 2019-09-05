@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"os/exec"
 
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/urfave/cli.v2"
@@ -72,7 +73,10 @@ func main() {
 
 		for _, e := range data {
 			// @todo add functionality to actually clone the repositories, instead of only listing them
+			cmd := exec.Command("git", "clone", e.GitURL)
 			fmt.Println(e.GitURL)
+			cmd.Start()
+			defer cmd.Wait()
 		}
 
 		return nil
