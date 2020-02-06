@@ -29,7 +29,6 @@ func main() {
 		Name:        "username",
 		Destination: &username,
 	}, &cli.StringFlag{
-		// @todo Add access-token flag as environment variable
 		Name:        "access-token",
 		Destination: &token,
 		EnvVars:     []string{"GITHUB_TOKEN"},
@@ -45,6 +44,10 @@ func main() {
 			},
 			Header: make(http.Header, 0),
 		}
+
+		query := req.URL.Query()
+		query.Add("per_page","1000")
+		req.URL.RawQuery = query.Encode()
 
 		headers := req.Header
 		headers.Add("accept", "application/vnd.github.v3+json")
@@ -72,7 +75,6 @@ func main() {
 		}
 
 		for _, e := range data {
-			// @todo add functionality to actually clone the repositories, instead of only listing them
 			cmd := exec.Command("git", "clone", e.GitURL)
 			fmt.Println(e.GitURL)
 			cmd.Start()
